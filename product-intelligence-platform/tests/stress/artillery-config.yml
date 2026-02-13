@@ -1,0 +1,33 @@
+config:
+  target: "http://localhost:3000"
+  phases:
+    - duration: 30
+      arrivalRate: 2
+      name: "Warm up"
+    - duration: 60
+      arrivalRate: 10
+      name: "Ramp up load"
+    - duration: 60
+      arrivalRate: 20
+      name: "Sustained load"
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Analytics Dashboard Load"
+    flow:
+      - get:
+          url: "/v1/analytics/dau?org_id=org_test&from=2026-01-01&to=2026-01-30"
+          capture:
+            - json: "$.data[0].date"
+              as: "dau_date"
+      - think: 1
+      - get:
+          url: "/v1/analytics/revenue?org_id=org_test&from=2026-01-01&to=2026-01-30"
+      - think: 1
+      - get:
+          url: "/v1/analytics/events?org_id=org_test&limit=20&offset=0"
+      - think: 2
+      - get:
+          url: "/v1/analytics/ltv?org_id=org_test&limit=5"

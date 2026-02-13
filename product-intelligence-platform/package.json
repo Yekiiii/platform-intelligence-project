@@ -1,0 +1,36 @@
+{
+  "name": "product-intelligence-platform",
+  "version": "1.0.0",
+  "description": "Event-Driven Product Intelligence Platform",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "worker": "node worker/index.js",
+    "worker:dev": "nodemon worker/index.js",
+    "seed": "node scripts/seed-data.js",
+    "seed:all": "node scripts/seed-data.js --all --users=100 --months=3",
+    "migrate": "psql $DATABASE_URL -f migrations/003_auth_tables.sql",
+    "test": "jest"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "bcryptjs": "^3.0.3",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "joi": "^18.0.2",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.16.3",
+    "redis": "^5.10.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "jest": "^30.2.0",
+    "nodemon": "^3.1.11",
+    "supertest": "^7.2.2"
+  }
+}
