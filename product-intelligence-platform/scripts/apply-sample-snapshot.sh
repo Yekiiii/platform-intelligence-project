@@ -30,7 +30,12 @@ fi
 echo "Applying snapshot file: $SNAPSHOT_FILE"
 echo "Target database: ${DATABASE_URL%@*}@***"
 
+# Sanitize dump for older PostgreSQL versions (e.g. no transaction_timeout support).
+TMP_SNAPSHOT="$(mktemp)"
+trap 'rm -f "$TMP_SNAPSHOT"' EXIT
+grep -vE '^SET transaction_timeout =|^\\restrict |^\\unrestrict ' "$SNAPSHOT_FILE" > "$TMP_SNAPSHOT"
+
 # ON_ERROR_STOP ensures import fails fast on SQL errors
-psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f "$SNAPSHOT_FILE"
+psql "$DATABASE_URL" -v ON_ERROR_STOP=1 -f "$TMP_SNAPSHOT"
 
 echo "Snapshot import complete."

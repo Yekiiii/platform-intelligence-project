@@ -33,7 +33,7 @@ pg_dump \
   --no-privileges \
   --file="$OUT_FILE"
 
-# Remove psql client meta-commands that may not exist in older versions.
-sed -i '/^\\restrict /d;/^\\unrestrict /d' "$OUT_FILE"
+# Remove statements that may not exist on older PostgreSQL/psql versions.
+sed -i '/^\\restrict /d;/^\\unrestrict /d;/^SET transaction_timeout =/d' "$OUT_FILE"
 
 echo "Snapshot export complete: $OUT_FILE"
