@@ -10,6 +10,8 @@
     "worker:dev": "nodemon worker/index.js",
     "seed": "node scripts/seed-data.js",
     "seed:all": "node scripts/seed-data.js --all --users=100 --months=3",
+    "snapshot:export": "bash scripts/export-sample-snapshot.sh",
+    "snapshot:apply": "bash scripts/apply-sample-snapshot.sh",
     "migrate": "psql $DATABASE_URL -f migrations/003_auth_tables.sql",
     "test": "jest"
   },
