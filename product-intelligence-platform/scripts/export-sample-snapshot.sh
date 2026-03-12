@@ -34,6 +34,6 @@ pg_dump \
   --file="$OUT_FILE"
 
 # Remove statements that may not exist on older PostgreSQL/psql versions.
-sed -i '/^\\restrict /d;/^\\unrestrict /d;/^SET transaction_timeout =/d' "$OUT_FILE"
+sed -i '/^\\restrict /d;/^\\unrestrict /d;/^SET transaction_timeout =/d;/^SELECT pg_catalog\.setval(/d' "$OUT_FILE"
 
 echo "Snapshot export complete: $OUT_FILE"
