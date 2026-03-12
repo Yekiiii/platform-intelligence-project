@@ -39,9 +39,9 @@ export default function Login() {
 
   // Demo accounts for quick login
   const demoAccounts = [
-    { email: 'admin@alpha.com', name: 'Alpha SaaS (Admin)', org: 'B2B SaaS' },
-    { email: 'admin@beta.com', name: 'Beta Commerce (Admin)', org: 'E-commerce' },
-    { email: 'admin@gamma.com', name: 'Gamma Learning (Admin)', org: 'EdTech' },
+    { email: 'admin1@alpha.com', name: 'Alpha SaaS (Admin)', org: 'B2B SaaS' },
+    { email: 'admin1@beta.com', name: 'Beta Commerce (Admin)', org: 'E-commerce' },
+    { email: 'admin1@gamma.com', name: 'Gamma Learning (Admin)', org: 'EdTech' },
   ];
 
   const quickLogin = (email) => {
