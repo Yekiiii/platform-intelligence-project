@@ -1,0 +1,11 @@
+# Sensitive files
+pipproject.pem
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Environment files
+.env
+.env.*
+!.env.example
